@@ -1,5 +1,7 @@
 # Jetton-Tact
 
+Jetton implemented using Tact. Jetton is Ton's standard for FT.
+
 ## Project structure
 
 -   `contracts` - source code of all the smart contracts of the project and their dependencies.
