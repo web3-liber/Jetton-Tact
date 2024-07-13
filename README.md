@@ -24,3 +24,13 @@
 ### Add a new contract
 
 `npx blueprint create ContractName` or `yarn blueprint create ContractName`
+
+## Others
+
+1. [0089-jetton-wallet-discovery](https://github.com/ton-blockchain/TEPs/blob/master/text/0089-jetton-wallet-discovery.md)
+
+2. So by default, the Cell, Slice and Builder values are stored as a reference.And with as remaining they're stored directly, as a Slice;
+
+```
+field: Slice as remaining;
+```
