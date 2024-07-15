@@ -27,6 +27,21 @@ Jetton implemented using Tact. Jetton is Ton's standard for FT.
 
 `npx blueprint create ContractName` or `yarn blueprint create ContractName`
 
+## Notes
+
+```bash
+# set registry 
+npm config set registry https://registry.npmmirror.com
+
+# install
+npm install @aws-crypto/sha256-js
+npm install @types/qs
+npm install base64url
+npm install open
+npm install enquirer
+npm install ton-core --save-dev
+```
+
 ## Others
 
 1. [0089-jetton-wallet-discovery](https://github.com/ton-blockchain/TEPs/blob/master/text/0089-jetton-wallet-discovery.md)
