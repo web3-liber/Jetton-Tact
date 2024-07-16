@@ -31,9 +31,7 @@ Jetton implemented using Tact. Jetton is Ton's standard for FT.
 
 ### Contract
 
-```bash
-npx blueprint create
-```
+1. Only the contract needs to be created using `npx blueprint create ContractName`, other things such as traits and messages do not need to be created using the command;
 
 ### Install 
 
@@ -47,12 +45,16 @@ npm install @types/qs
 npm install base64url
 npm install open
 npm install enquirer
-npm install ton-core --save-dev
+npm install ton-core 
+
+npm install @dedust/sdk
+npm install tonweb
+npm install @ston-fi/sdk@0.4.0  
 ```
 
 ## Others
 
-1. [0089-jetton-wallet-discovery](https://github.com/ton-blockchain/TEPs/blob/master/text/0089-jetton-wallet-discovery.md)
+1. [0089-sampleJetton-wallet-discovery](https://github.com/ton-blockchain/TEPs/blob/master/text/0089-sampleJetton-wallet-discovery.md)
 
 2. So by default, the Cell, Slice and Builder values are stored as a reference.And with as remaining they're stored directly, as a Slice;
 

@@ -24,9 +24,12 @@
     },
     "dependencies": {
         "@aws-crypto/sha256-js": "^5.2.0",
+        "@dedust/sdk": "^0.8.7",
+        "@ston-fi/sdk": "^0.4.0",
         "@types/qs": "^6.9.15",
         "base64url": "^3.0.1",
         "enquirer": "^2.4.1",
-        "open": "^10.1.0"
+        "open": "^10.1.0",
+        "tonweb": "^0.0.66"
     }
 }
