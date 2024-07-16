@@ -1,4 +1,5 @@
 import "./jetton";
+import "./jetton_wallet";
 
 message Mint {
     amount: Int;

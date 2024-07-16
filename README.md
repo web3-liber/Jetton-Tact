@@ -27,7 +27,15 @@ Jetton implemented using Tact. Jetton is Ton's standard for FT.
 
 `npx blueprint create ContractName` or `yarn blueprint create ContractName`
 
-## Notes
+## commond
+
+### Contract
+
+```bash
+npx blueprint create
+```
+
+### Install 
 
 ```bash
 # set registry 
