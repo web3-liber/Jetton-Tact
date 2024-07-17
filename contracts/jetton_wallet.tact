@@ -31,7 +31,7 @@ contract JettonWallet {
         self.balance = self.balance - msg.amount;
         require(self.balance >= 0, "Invalid balance");
 
-        let walletInit: StateInit = initOf JettonWallet(msg.sender, self.master);
+        let walletInit: StateInit = initOf JettonWallet(msg.receiver, self.master);
         let walletAddress: Address = contractAddress(walletInit);
         send(SendParameters{
             to: walletAddress,
@@ -41,7 +41,7 @@ contract JettonWallet {
             body: TokenTransferInternal{
                 queryId: msg.queryId,
                 amount: msg.amount,
-                from: self.owner,   //Why owner and not myAddress() ?
+                from: self.owner,   
                 responseDestination: msg.responseDestination,
                 forwardTonAmount: msg.forwardTonAmount,
                 forwardPayload: msg.forwardPayload

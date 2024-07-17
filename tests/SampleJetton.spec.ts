@@ -134,7 +134,7 @@ describe("SampleJetton", () => {
             $$type: "TokenTransfer",
             queryId: 0n,
             amount: transferAmount,
-            sender: receiver.address,  //receiver.address ??
+            receiver: receiver.address,  //receiver.address ??
             responseDestination: sender.address,
             customPayload: null,
             forwardTonAmount: toNano("0.1"),
@@ -143,7 +143,7 @@ describe("SampleJetton", () => {
         const tokenTransferResult = await senderWallet.send(sender.getSender(), { value: toNano("0.5") }, tokenTransferMessage);
         expect(tokenTransferResult.transactions).toHaveTransaction({
             from: sender.address,
-            to: senderWallet.address,  
+            to: senderWallet.address,  //why
             success: true,
         });
 

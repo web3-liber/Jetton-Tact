@@ -54,7 +54,7 @@ npm install @ston-fi/sdk@0.4.0
 
 ## Others
 
-1. [0089-sampleJetton-wallet-discovery](https://github.com/ton-blockchain/TEPs/blob/master/text/0089-sampleJetton-wallet-discovery.md)
+1. [0089-jetton-wallet-discovery](https://github.com/ton-blockchain/TEPs/blob/master/text/0089-jetton-wallet-discovery.md)
 
 2. So by default, the Cell, Slice and Builder values are stored as a reference.And with as remaining they're stored directly, as a Slice;
 

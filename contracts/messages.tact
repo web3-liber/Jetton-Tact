@@ -16,7 +16,7 @@ struct JettonWalletData {
 message(0xf8a7ea5) TokenTransfer {
     queryId: Int as uint64;
     amount: Int as coins;
-    sender: Address;
+    receiver: Address;
     responseDestination: Address;
     customPayload: Cell?;
     forwardTonAmount: Int as coins;
