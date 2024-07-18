@@ -33,13 +33,18 @@ Jetton implemented using Tact. Jetton is Ton's standard for FT.
 
 1. Only the contract needs to be created using `npx blueprint create ContractName`, other things such as traits and messages do not need to be created using the command;
 
-### Install 
+### Project 
+
+1. npm config 
 
 ```bash
 # set registry 
 npm config set registry https://registry.npmmirror.com
+```
 
-# install
+2. Install 
+
+```bash
 npm install @aws-crypto/sha256-js
 npm install @types/qs
 npm install base64url
@@ -50,6 +55,13 @@ npm install ton-core
 npm install @dedust/sdk
 npm install tonweb
 npm install @ston-fi/sdk@0.4.0  
+npm install @ton/core@0.19.0
+```
+
+3. 创建 `.env` 文件，并配置
+
+```bash
+mnemonics_2=
 ```
 
 ## Others
