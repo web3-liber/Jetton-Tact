@@ -6,7 +6,7 @@ message Mint {
     receiver: Address;
 }
 
-contract JettonInstance with Deployable {
+contract JettonInstance with Jetton {
 
     totalSupply: Int as coins;
     mintable: Bool;
