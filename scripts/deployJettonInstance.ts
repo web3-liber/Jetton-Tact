@@ -17,9 +17,9 @@ export async function run(provider: NetworkProvider) {
     
     let maxSupply = toNano(1000000000);
 
-    const sampleJetton = provider.open(await JettonInstance.fromInit(provider.sender().address as Address, jettonContent, maxSupply));
+    const jettonInstance = provider.open(await JettonInstance.fromInit(provider.sender().address as Address, jettonContent, maxSupply));
 
-    await sampleJetton.send(
+    await jettonInstance.send(
         provider.sender(),
         {
             value: toNano('0.05'),
@@ -31,5 +31,5 @@ export async function run(provider: NetworkProvider) {
         }
     );
 
-    await provider.waitForDeploy(sampleJetton.address);
+    await provider.waitForDeploy(jettonInstance.address);
 }
