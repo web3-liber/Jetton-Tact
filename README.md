@@ -1,6 +1,6 @@
 # Jetton-Tact
 
-Jetton implemented using Tact. Jetton is Ton's standard for FT.
+This project was created using blueprint and implements 0074-jettons-standard. The project's smart contract is implemented using Tact.
 
 ## Project structure
 
@@ -9,67 +9,54 @@ Jetton implemented using Tact. Jetton is Ton's standard for FT.
 -   `tests` - tests for the contracts.
 -   `scripts` - scripts used by the project, mainly the deployment scripts.
 
-## How to use
+## How to Use
 
-### Build
+1. **Clone the Repository**:
+    ```bash
+    https://github.com/Liber-C/Jetton-Tact.git
+    ```
 
-`npx blueprint build` or `yarn blueprint build`
+2. **Navigate to the Project Directory**:
+    ```bash
+    cd Jetton-Tact
+    ```
 
-### Test
+3. **Install Dependencies**:
+    ```bash
+    npm install
+    ```
 
-`npx blueprint test` or `yarn blueprint test`
+4. **Build the Contract**:
+    ```bash
+    npx blueprint build
+    ```
 
-### Deploy or run another script
+5. **Test the Contract**:
+    ```bash
+    npx blueprint test
+    ```
 
-`npx blueprint run` or `yarn blueprint run`
+6. **Customize the Deploy Script**:
+    - Open the `deployJettonInstance.ts` file.
+    - Update the `name`, `description`, `symbol`, and `image` variables with your desired values.
+    ```bash
+    const jettonParams = {
+        name: "Jetton Name",
+        description: "A standard Instance for Jettons (TON fungible tokens).",
+        symbol: "JN",
+        image: "https://avatars.githubusercontent.com/u/104382459?s=200&v=4",
+    };
+    ```
 
-### Add a new contract
+7. **Deploy the Contract**:
+    ```bash
+    npx blueprint run
+    ```
 
-`npx blueprint create ContractName` or `yarn blueprint create ContractName`
+## Reference
 
-## commond
+1. [0074-jettons-standard](https://github.com/ton-blockchain/TEPS/blob/master/text/0074-jettons-standard.md)
 
-### Contract
+## License
 
-1. Only the contract needs to be created using `npx blueprint create ContractName`, other things such as traits and messages do not need to be created using the command;
-
-### Project 
-
-1. npm config 
-
-```bash
-# set registry 
-npm config set registry https://registry.npmmirror.com
-```
-
-2. Install 
-
-```bash
-npm install @aws-crypto/sha256-js
-npm install @types/qs
-npm install base64url
-npm install open
-npm install enquirer
-npm install ton-core 
-
-npm install @dedust/sdk
-npm install tonweb
-npm install @ston-fi/sdk@0.4.0  
-npm install @ton/core@0.19.0
-```
-
-3. 创建 `.env` 文件，并配置
-
-```bash
-mnemonics_2=
-```
-
-## Others
-
-1. [0089-jetton-wallet-discovery](https://github.com/ton-blockchain/TEPs/blob/master/text/0089-jetton-wallet-discovery.md)
-
-2. So by default, the Cell, Slice and Builder values are stored as a reference.And with as remaining they're stored directly, as a Slice;
-
-```
-field: Slice as remaining;
-```
+This project is licensed under the MIT License.
