@@ -2,7 +2,7 @@ import { CompilerConfig } from '@ton/blueprint';
 
 export const compile: CompilerConfig = {
     lang: 'tact',
-    target: 'contracts/sample_jetton.tact',
+    target: 'contracts/jetton_instance.tact',
     options: {
         debug: true,
     },
