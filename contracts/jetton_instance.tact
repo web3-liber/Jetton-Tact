@@ -6,20 +6,20 @@ message Mint {
     receiver: Address;
 }
 
-contract SampleJetton with Jetton {
+contract JettonInstance with Deployable {
 
     totalSupply: Int as coins;
     mintable: Bool;
     owner: Address;
-    content: Cell;
+    jettonContent: Cell;
 
     maxSupply: Int as coins; 
 
-    init(owner: Address, content: Cell, maxSupply: Int) {
+    init(owner: Address, jettonContent: Cell, maxSupply: Int) {
         self.totalSupply = 0;
         self.mintable = true;
         self.owner = owner;
-        self.content = content;
+        self.jettonContent = jettonContent;
         self.maxSupply = maxSupply;
     }
 

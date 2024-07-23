@@ -1,6 +1,14 @@
 import "@stdlib/ownable";
 import "./messages";
 
+struct JettonData {
+    totalSupply: Int;
+    mintable: Bool;
+    owner: Address;
+    jettonContent: Cell;
+    jettonWalletCode: Cell;
+}
+
 //================================ Trait Jetton ================================//
 @interface("org.ton.jetton.master")
 trait Jetton with Ownable {
@@ -8,60 +16,25 @@ trait Jetton with Ownable {
     totalSupply: Int;
     mintable: Bool;
     owner: Address;
-    content: Cell;
+    jettonContent: Cell;
 
-    receive(msg: TokenUpdateContent) {
-        self.requireOwner();
-        self.content = msg.content;
-    }
-
-    receive(msg: TokenBurnNotification) {
-        self.requireSenderAsWalletOwner(msg.responseDestination!!);
+    receive(msg: BurnNotification) {
+        self.requireSenderAsWalletOwner(msg.sender);
         self.totalSupply = self.totalSupply - msg.amount;
         if (msg.responseDestination != null) { //CashBack
             send(SendParameters{
-                to: msg.responseDestination!!,  
+                to: msg.responseDestination,  
                 value: 0,
                 bounce: false,
-                mode: SendRemainingValue,
-                body: TokenExcesses{
+                mode: SendRemainingValue + SendIgnoreErrors,
+                body: Excesses{
                     queryId: msg.queryId
                 }.toCell()
             });
         }
     }
 
-    receive(msg: ProvideWalletAddress) {
-        let ctx: Context = context();
-        require(ctx.value >= ton("0.0061"), "Insufficient gas"); 
-        let walletInit: StateInit = initOf JettonWallet(msg.ownerAddress, myAddress());
-        //let walletInit: StateInit = getJettonWalletInit(msg.ownerAddress);
-        if (msg.includeAddress) {
-            send(SendParameters{
-                to: sender(),
-                value: 0,
-                mode: SendRemainingValue,
-                body: TakeWalletAddress{
-                    queryId: msg.queryId,
-                    walletAddress: contractAddress(walletInit),
-                    ownerAddress: beginCell().storeBool(true).storeAddress(msg.ownerAddress).endCell().asSlice() //Why 
-                }.toCell()
-            });
-        } else {
-            send(SendParameters{
-                to: sender(),
-                value: 0,
-                mode: SendRemainingValue,
-                body: TakeWalletAddress{
-                    queryId: msg.queryId,
-                    walletAddress: contractAddress(walletInit),
-                    ownerAddress: beginCell().storeBool(false).endCell().asSlice()
-                }.toCell()
-            });
-        }
-    }
-
-    //==== Private Methods ====//
+    //==== Private-methods ====//
 
     // @to The Address receive the Jetton token after minting
     // @amount The amount of Jetton token being minted
@@ -74,15 +47,15 @@ trait Jetton with Ownable {
         send(SendParameters{
             to: contractAddress(walletInit),
             value: 0,
-            bounce: true,
+            bounce: true, 
             mode: SendRemainingValue,
-            body: TokenTransferInternal{
-                queryId: 0, //Why zero ?
+            body: TransferInternal{
+                queryId: 0, 
                 amount: amount,
                 from: myAddress(),
                 responseDestination: responseDestination,
                 forwardTonAmount: 0,
-                forwardPayload: beginCell().endCell().asSlice()
+                forwardPayload: emptySlice()
             }.toCell(),
             code: walletInit.code,
             data: walletInit.data
@@ -90,28 +63,29 @@ trait Jetton with Ownable {
     }
 
     fun requireSenderAsWalletOwner(owner: Address) {
-        let ctx: Context = context();  //Is it possible to use sender() directly without using ctx.sender ?
         let walletInit: StateInit = self.getJettonWalletInit(owner);
-        require(contractAddress(walletInit) == ctx.sender, "Invalid sender");
+        require(contractAddress(walletInit) == sender(), "Invalid sender");
     }
 
     virtual fun getJettonWalletInit(owner: Address): StateInit {
         return initOf JettonWallet(owner, myAddress());
     }
 
-    //==== Getter Methods ====//
+    //==== Get-methods ====//
 
-    get fun getJettonData(): JettonData {
+    get fun get_jetton_data(): JettonData {
         return JettonData{
             totalSupply: self.totalSupply,
             mintable: self.mintable,
             owner: self.owner,
-            content: self.content,
-            walletCode: initOf JettonWallet(self.owner, myAddress()).code  //Why isn't it written this way ? (initOf JettonWallet(self.owner, myAddress())).code
+            jettonContent: self.jettonContent,
+            jettonWalletCode: self.getJettonWalletInit(myAddress()).code
         };
     }
 
-    get fun getWalletAddress(owner: Address): Address {
-        return contractAddress(initOf JettonWallet(owner, myAddress()));
+    get fun get_wallet_address(ownerAddress: Address): Address {
+        let walletInit: StateInit = self.getJettonWalletInit(ownerAddress);
+        let jettonWalletAddress: Address = contractAddress(walletInit);
+        return jettonWalletAddress;
     }
 }
